@@ -3,6 +3,7 @@ import openai
 import os
 from PIL import Image
 from io import BytesIO
+import requests
 
 # OpenAI API 키를 환경 변수에서 가져오기
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -28,20 +29,20 @@ if st.button("로고 생성"):
         f"로고는 깨끗하고 현대적이며, 기술과 관련된 느낌을 주어야 합니다."
     )
     
-    # DALL-E API 호출
+    # GPT-4 모델을 사용하여 이미지 생성
     try:
         response = openai.Image.create(
             prompt=prompt,
             n=1,
             size="1024x1024",
+            response_format="url"
         )
-        # API에서 이미지 URL 가져오기
+        # 생성된 이미지의 URL 가져오기
         image_url = response['data'][0]['url']
-        
-        # 이미지 표시
+
+        # 이미지 다운로드 및 표시
         st.image(image_url, caption="생성된 로고")
         st.write(f"사용된 프롬프트: {prompt}")
-    
+
     except Exception as e:
-        st.error("이미지를 생성하는 동안 오류가 발생했습니다.")
-        st.write(e)
+        st.error("이미지를 생성하는 동안 오류가 발생
