@@ -45,4 +45,5 @@ if st.button("로고 생성"):
         st.write(f"사용된 프롬프트: {prompt}")
 
     except Exception as e:
-        st.error("이미지를 생성하는 동안 오류가 발생
+        st.error("이미지를 생성하는 동안 오류가 발생했습니다.")
+        st.write(e)
